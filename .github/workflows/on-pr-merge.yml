@@ -16,9 +16,4 @@ jobs:
         with:
           submodules: recursive
       - name: Build & Push All
-        run: |
-
-          # Login for image push
-          echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
-          make
+        run: make
