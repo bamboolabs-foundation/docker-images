@@ -1,10 +1,6 @@
-FROM --platform=${TARGETPLATFORM} ghcr.io/bamboolabs-foundation/builder-rust-llvm16:latest
+ARG PLATFORM=${TARGETPLATFORM}
 
-## MultiArch Arguments - Required
-ARG TARGETARCH
-ARG TARGETPLATFORM
-RUN test -n "${TARGETARCH:?}" && \
-    test -n "${TARGETPLATFORM:?}"
+FROM --platform=${PLATFORM} ghcr.io/bamboolabs-foundation/builder-rust-llvm16:latest
 
 ## NodeJS LTS 18 & NPM
 RUN mkdir -p /etc/apt/keyrings && \

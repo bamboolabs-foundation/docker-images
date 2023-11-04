@@ -1,15 +1,9 @@
-FROM --platform=${TARGETPLATFORM} ubuntu:22.04
+ARG PLATFORM=${TARGETPLATFORM}
 
-## MultiArch Arguments - Required
-ARG TARGETARCH
-ARG TARGETPLATFORM
-RUN test -n "${TARGETARCH:?}" && \
-    test -n "${TARGETPLATFORM:?}"
+FROM --platform=${PLATFORM} ubuntu:22.04
 
 ## Environment Variables - Build Arguments
 ENV DEBIAN_FRONTEND="noninteractive"
-ENV TARGETARCH=${TARGETARCH}
-ENV TARGETPLATFORM=${TARGETPLATFORM}
 ENV TZ="Etc/UTC"
 
 ## Base Dependencies

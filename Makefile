@@ -66,9 +66,8 @@ push-base-ubuntu2204: | prepare
 		-t ${TAG_PREFIX}/base-ubuntu2204:latest \
 		-f base/ubuntu2204.Dockerfile \
 		--pull \
-		--push \
 		--platform ${BUILDX_PLATFORMS} \
-		--output type=image,${ANNOTATIONS} \
+		--output type=registry,${ANNOTATIONS} \
 		.
 
 push-builder-rust-llvm16: | push-base-ubuntu2204
@@ -79,9 +78,8 @@ push-builder-rust-llvm16: | push-base-ubuntu2204
 		-t ${TAG_PREFIX}/builder-rust-llvm16:latest \
 		-f builder/rust-llvm16.Dockerfile \
 		--pull \
-		--push \
 		--platform ${BUILDX_PLATFORMS} \
-		--output type=image,${ANNOTATIONS} \
+		--output type=registry,${ANNOTATIONS} \
 		.
 
 push-builder-node18: | push-builder-rust-llvm16
@@ -92,9 +90,8 @@ push-builder-node18: | push-builder-rust-llvm16
 		-t ${TAG_PREFIX}/builder-node18:latest \
 		-f builder/node18.Dockerfile \
 		--pull \
-		--push \
 		--platform ${BUILDX_PLATFORMS} \
-		--output type=image,${ANNOTATIONS} \
+		--output type=registry,${ANNOTATIONS} \
 		.
 
 push-builder-substrate: | push-builder-node18
@@ -105,9 +102,8 @@ push-builder-substrate: | push-builder-node18
 		-t ${TAG_PREFIX}/builder-substrate:latest \
 		-f builder/substrate.Dockerfile \
 		--pull \
-		--push \
 		--platform ${BUILDX_PLATFORMS} \
-		--output type=image,${ANNOTATIONS} \
+		--output type=registry,${ANNOTATIONS} \
 		.
 
 push-builder-android28: | push-builder-substrate
@@ -118,47 +114,46 @@ push-builder-android28: | push-builder-substrate
 		-t ${TAG_PREFIX}/builder-android28:latest \
 		-f builder/android28.Dockerfile \
 		--pull \
-		--push \
-		--platform ${BUILDX_PLATFORM_AMD64} \
-		--output type=image,${ANNOTATIONS} \
+		--platform linux/${CPU_ARCH} \
+		--output type=registry,${ANNOTATIONS} \
 		.
 
 check-base-ubuntu2204:
-	@echo -e "\033[92m\Checking Docker Image - Base Ubuntu 22.04\033[0m"
-	docker build \
+	@echo -e "\033[92m\nChecking Docker Image - Base Ubuntu 22.04\033[0m"
+	DOCKER_BUILDKIT=0 docker build \
 		-t ${TAG_PREFIX}/base-ubuntu2204:latest \
 		-f base/ubuntu2204.Dockerfile \
-		--platform linux/${CPU_ARCH} \
+		--build-arg PLATFORM=linux/${CPU_ARCH} \
 		.
 
 check-builder-rust-llvm16: | check-base-ubuntu2204
-	@echo -e "\033[92m\Checking Docker Image - Builder Rust LLVM16\033[0m"
-	docker build \
+	@echo -e "\033[92m\nChecking Docker Image - Builder Rust LLVM16\033[0m"
+	DOCKER_BUILDKIT=0 docker build \
 		-t ${TAG_PREFIX}/builder-rust-llvm16:latest \
 		-f builder/rust-llvm16.Dockerfile \
-		--platform linux/${CPU_ARCH} \
+		--build-arg PLATFORM=linux/${CPU_ARCH} \
 		.
 
 check-builder-node18: | check-builder-rust-llvm16
-	@echo -e "\033[92m\Checking Docker Image - Builder NodeJS LTS 18\033[0m"
-	docker build \
+	@echo -e "\033[92m\nChecking Docker Image - Builder NodeJS LTS 18\033[0m"
+	DOCKER_BUILDKIT=0 docker build \
 		-t ${TAG_PREFIX}/builder-node18:latest \
 		-f builder/node18.Dockerfile \
-		--platform linux/${CPU_ARCH} \
+		--build-arg PLATFORM=linux/${CPU_ARCH} \
 		.
 
 check-builder-substrate: | check-builder-node18
-	@echo -e "\033[92m\Checking Docker Image - Builder Substrate & Parity Ink!\033[0m"
-	docker build \
+	@echo -e "\033[92m\nChecking Docker Image - Builder Substrate & Parity Ink!\033[0m"
+	DOCKER_BUILDKIT=0 docker build \
 		-t ${TAG_PREFIX}/builder-substrate:latest \
 		-f builder/substrate.Dockerfile \
-		--platform linux/${CPU_ARCH} \
+		--build-arg PLATFORM=linux/${CPU_ARCH} \
 		.
 
 check-builder-android28: | check-builder-substrate
-	@echo -e "\033[92m\Checking Docker Image - Builder Android (28-33)\033[0m"
-	docker build \
+	@echo -e "\033[92m\nChecking Docker Image - Builder Android (28-33)\033[0m"
+	DOCKER_BUILDKIT=0 docker build \
 		-t ${TAG_PREFIX}/builder-android28:latest \
 		-f builder/android28.Dockerfile \
-		--platform linux/${CPU_ARCH} \
+		--build-arg PLATFORM=linux/${CPU_ARCH} \
 		.

@@ -1,13 +1,9 @@
-FROM --platform=${TARGETPLATFORM} ghcr.io/bamboolabs-foundation/builder-substrate:latest
+FROM --platform=linux/amd64 ghcr.io/bamboolabs-foundation/builder-substrate:latest
 
 ## MultiArch Arguments - Required
-ARG TARGETARCH
-ARG TARGETPLATFORM
 ARG GRADLE_VERSION="8.2.1"
 ARG NDK_VERSION="25.2.9519653"
 ARG SDKMANAGER_VERSION="9477386_latest"
-RUN test -n "${TARGETARCH:?}" && \
-    test -n "${TARGETPLATFORM:?}"
 
 ## Environment Variables - Android specific
 ENV ANDROID_HOME="/opt/android"
