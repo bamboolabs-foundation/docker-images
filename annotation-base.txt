@@ -1,0 +1,1 @@
+annotation-index.org.opencontainers.image.authors="Aditya Kresna <aditya.kresna@outlook.co.id>",annotation-index.org.opencontainers.image.source="https://github.com/bamboolabs-foundation/docker-images",annotation-index.org.opencontainers.image.description=
