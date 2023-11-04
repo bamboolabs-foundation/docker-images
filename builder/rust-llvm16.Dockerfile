@@ -1,13 +1,11 @@
-FROM --platform=${TARGETPLATFORM} ghcr.io/bamboolabs-foundation/base-ubuntu2204:latest
+ARG PLATFORM=${TARGETPLATFORM}
+
+FROM --platform=${PLATFORM} ghcr.io/bamboolabs-foundation/base-ubuntu2204:latest
 
 ## MultiArch Arguments - Required
-ARG TARGETARCH
-ARG TARGETPLATFORM
 ARG RS_NIGHTLY="nightly-2023-08-08"
 ARG RS_STABLE="1.72.1"
-RUN test -n "${TARGETARCH:?}" && \
-    test -n "${TARGETPLATFORM:?}" && \
-    test -n "${RS_NIGHTLY:?}" && \
+RUN test -n "${RS_NIGHTLY:?}" && \
     test -n "${RS_STABLE:?}"
 
 ## Environment Variables - Build Arguments (Unordered)
@@ -18,8 +16,6 @@ ENV CXX="clang-16"
 ENV RS_NIGHTLY=${RS_NIGHTLY}
 ENV RS_STABLE=${RS_STABLE}
 ENV RUSTUP_HOME="/usr/local/rustup"
-ENV TARGETARCH=${TARGETARCH}
-ENV TARGETPLATFORM=${TARGETPLATFORM}
 
 ## Environment Variables - Build Arguments (Ordered)
 ENV CARGO_BIN="${CARGO_HOME}/bin"

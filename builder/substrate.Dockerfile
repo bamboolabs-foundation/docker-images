@@ -1,10 +1,8 @@
-FROM --platform=${TARGETPLATFORM} ghcr.io/bamboolabs-foundation/builder-node18:latest
+ARG PLATFORM=${TARGETPLATFORM}
 
-## MultiArch Arguments - Required
-ARG TARGETARCH
-ARG TARGETPLATFORM
-RUN test -n "${TARGETARCH:?}" && \
-    test -n "${TARGETPLATFORM:?}"
+FROM --platform=${PLATFORM} ghcr.io/bamboolabs-foundation/builder-node18:latest
+
+ARG PLATFORM=${TARGETPLATFORM}
 
 ## Prebuilt binaries
-COPY prebuilt/${TARGETPLATFORM}/* ${CARGO_HOME}/bin/
+COPY prebuilt/${PLATFORM}/* ${CARGO_HOME}/bin/
