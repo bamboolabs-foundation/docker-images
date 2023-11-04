@@ -114,7 +114,7 @@ push-builder-android28: | push-builder-substrate
 		-t ${TAG_PREFIX}/builder-android28:latest \
 		-f builder/android28.Dockerfile \
 		--pull \
-		--platform linux/${CPU_ARCH} \
+		--platform ${BUILDX_PLATFORM_AMD64} \
 		--output type=registry,${ANNOTATIONS} \
 		.
 
@@ -123,7 +123,7 @@ check-base-ubuntu2204:
 	DOCKER_BUILDKIT=0 docker build \
 		-t ${TAG_PREFIX}/base-ubuntu2204:latest \
 		-f base/ubuntu2204.Dockerfile \
-		--build-arg PLATFORM=linux/${CPU_ARCH} \
+		--build-arg PLATFORM=${BUILDX_PLATFORM_AMD64} \
 		.
 
 check-builder-rust-llvm16: | check-base-ubuntu2204
@@ -131,7 +131,7 @@ check-builder-rust-llvm16: | check-base-ubuntu2204
 	DOCKER_BUILDKIT=0 docker build \
 		-t ${TAG_PREFIX}/builder-rust-llvm16:latest \
 		-f builder/rust-llvm16.Dockerfile \
-		--build-arg PLATFORM=linux/${CPU_ARCH} \
+		--build-arg PLATFORM=${BUILDX_PLATFORM_AMD64} \
 		.
 
 check-builder-node18: | check-builder-rust-llvm16
@@ -139,7 +139,7 @@ check-builder-node18: | check-builder-rust-llvm16
 	DOCKER_BUILDKIT=0 docker build \
 		-t ${TAG_PREFIX}/builder-node18:latest \
 		-f builder/node18.Dockerfile \
-		--build-arg PLATFORM=linux/${CPU_ARCH} \
+		--build-arg PLATFORM=${BUILDX_PLATFORM_AMD64} \
 		.
 
 check-builder-substrate: | check-builder-node18
@@ -147,7 +147,7 @@ check-builder-substrate: | check-builder-node18
 	DOCKER_BUILDKIT=0 docker build \
 		-t ${TAG_PREFIX}/builder-substrate:latest \
 		-f builder/substrate.Dockerfile \
-		--build-arg PLATFORM=linux/${CPU_ARCH} \
+		--build-arg PLATFORM=${BUILDX_PLATFORM_AMD64} \
 		.
 
 check-builder-android28: | check-builder-substrate
@@ -155,5 +155,4 @@ check-builder-android28: | check-builder-substrate
 	DOCKER_BUILDKIT=0 docker build \
 		-t ${TAG_PREFIX}/builder-android28:latest \
 		-f builder/android28.Dockerfile \
-		--build-arg PLATFORM=linux/${CPU_ARCH} \
 		.

@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 ghcr.io/bamboolabs-foundation/builder-substrate:latest
+FROM ghcr.io/bamboolabs-foundation/builder-substrate:latest
 
 ## MultiArch Arguments - Required
 ARG GRADLE_VERSION="8.2.1"
