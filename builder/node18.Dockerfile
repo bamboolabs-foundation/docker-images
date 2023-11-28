@@ -1,6 +1,6 @@
 ARG PLATFORM=${TARGETPLATFORM}
 
-FROM --platform=${PLATFORM} ghcr.io/bamboolabs-foundation/builder-rust-llvm16:latest
+FROM --platform=${PLATFORM} ghcr.io/bamboolabs-foundation/builder-rust-llvm:latest
 
 ## NodeJS LTS 18 & NPM
 RUN mkdir -p /etc/apt/keyrings && \

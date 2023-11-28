@@ -17,24 +17,24 @@ Either `x86_64 (amd64)` or `aarch64 (arm64)`, except for `Android Builder (amd64
 
 ## [Builder](builder/README.md)
 
-### [Builder - Rust LLVM 16](builder/rust-llvm16.Dockerfile)
+### [Builder - Rust LLVM](builder/rust-llvm.Dockerfile)
 
 * Base Image     : `ghcr.io/bamboolabs-foundation/base-ubuntu2204:latest`
-* Image Name     : `ghcr.io/bamboolabs-foundation/builder-rust-llvm16:latest`
-* Rust Nightly   : `nightly-2023-08-08`
-* Rust Stable    : `1.72.1`
-* LLVM           : `16.0.6`
+* Image Name     : `ghcr.io/bamboolabs-foundation/builder-rust-llvm:latest`
+* Rust Nightly   : `nightly-2023-11-11`
+* Rust Stable    : `1.74.0`
+* LLVM           : `16.0.6` & `17.0.4`
 * GCC/G++        : `11.4.0`
 
-### [Builder - NodeJS LTS 18](builder/rust-llvm16.Dockerfile)
+### [Builder - NodeJS LTS 18](builder/rust-llvm.Dockerfile)
 
-* Base Image     : `ghcr.io/bamboolabs-foundation/builder-rust-llvm16:latest`
+* Base Image     : `ghcr.io/bamboolabs-foundation/builder-rust-llvm:latest`
 * Image Name     : `ghcr.io/bamboolabs-foundation/builder-node18:latest`
 * NodeJS         : `18.18.2`
 * NPM            : `9.8.1`
 * Yarn Classic   : `1.22.19`
 
-### [Builder - Substrate & Parity Ink](builder/rust-llvm16.Dockerfile)
+### [Builder - Substrate & Parity Ink](builder/rust-llvm.Dockerfile)
 
 * Base Image     : `ghcr.io/bamboolabs-foundation/builder-node18:latest`
 * Image Name     : `ghcr.io/bamboolabs-foundation/builder-substrate:latest`
@@ -48,7 +48,7 @@ Either `x86_64 (amd64)` or `aarch64 (arm64)`, except for `Android Builder (amd64
   * [wasmtime-cli@14.0.4](https://github.com/bytecodealliance/wasmtime/releases/tag/v14.0.4)
   * [websocat@1.12.0](https://github.com/vi/websocat/releases/tag/v1.12.0)
 
-### [Builder - Android 28 - 33](builder/rust-llvm16.Dockerfile)
+### [Builder - Android 28 - 33](builder/rust-llvm.Dockerfile)
 
 * Base Image     : `ghcr.io/bamboolabs-foundation/builder-substrate:latest`
 * Image Name     : `ghcr.io/bamboolabs-foundation/builder-android18:latest`
