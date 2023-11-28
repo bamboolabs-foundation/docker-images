@@ -14,7 +14,7 @@ TAG_PREFIX			:=	ghcr.io/${ORG_NAME}
 .PHONY: check-base-ubuntu2204 push-base-ubuntu2204
 .PHONY: check-base push-base
 .PHONY: check-builder push-builder
-.PHONY: check-builder-rust-llvm16 push-builder-rust-llvm16
+.PHONY: check-builder-rust-llvm push-builder-rust-llvm
 .PHONY: check-builder-node18 push-builder-node18
 .PHONY: check-builder-substrate push-builder-substrate
 .PHONY: check-builder-android28 push-builder-android28
@@ -23,7 +23,7 @@ TAG_PREFIX			:=	ghcr.io/${ORG_NAME}
 .ONESHELL: check-base-ubuntu2204 push-base-ubuntu2204
 .ONESHELL: check-base push-base
 .ONESHELL: check-builder push-builder
-.ONESHELL: check-builder-rust-llvm16 push-builder-rust-llvm16
+.ONESHELL: check-builder-rust-llvm push-builder-rust-llvm
 .ONESHELL: check-builder-node18 push-builder-node18
 .ONESHELL: check-builder-substrate push-builder-substrate
 .ONESHELL: check-builder-android28 push-builder-android28
@@ -34,13 +34,13 @@ push: | push-base push-builder
 
 push-base: | push-base-ubuntu2204
 
-push-builder: | push-builder-rust-llvm16 push-builder-node18 push-builder-substrate push-builder-android28
+push-builder: | push-builder-rust-llvm push-builder-node18 push-builder-substrate push-builder-android28
 
 check: | check-base check-builder
 
 check-base: | check-base-ubuntu2204
 
-check-builder: | check-builder-rust-llvm16 check-builder-node18 check-builder-substrate check-builder-android28
+check-builder: | check-builder-rust-llvm check-builder-node18 check-builder-substrate check-builder-android28
 
 clean:
 	@echo -e "\033[92m\nUninstalling Docker BuildX MultiArch Binary Format...\033[0m"
@@ -56,8 +56,6 @@ prepare:
 	@(docker buildx create --name ${BUILDX_BUILDER_NAME} --driver docker-container --bootstrap --use > /dev/null 2>&1) || true
 	@echo -e "\033[34m\nDocker BuildX Builder for MultiArch Configured ("${BUILDX_BUILDER_NAME}")\033[0m"
 
-
-
 push-base-ubuntu2204: | prepare
 	@echo -e "\033[92m\nBuilding Docker Image - Base Ubuntu 22.04\033[0m"
 	@$(eval ANNOTATIONS=$(shell cat annotation-base.txt | tr -d '\n'))
@@ -70,19 +68,19 @@ push-base-ubuntu2204: | prepare
 		--output type=registry,${ANNOTATIONS} \
 		.
 
-push-builder-rust-llvm16: | push-base-ubuntu2204
-	@echo -e "\033[92m\nBuilding Docker Image - Builder Rust LLVM16\033[0m"
+push-builder-rust-llvm: | push-base-ubuntu2204
+	@echo -e "\033[92m\nBuilding Docker Image - Builder Rust LLVM\033[0m"
 	@$(eval ANNOTATIONS=$(shell cat annotation-base.txt | tr -d '\n'))
-	@$(eval ANNOTATIONS=${ANNOTATIONS}"Builder image for Rust with LLVM 16")
+	@$(eval ANNOTATIONS=${ANNOTATIONS}"Builder image for Rust with LLVM")
 	docker buildx build \
-		-t ${TAG_PREFIX}/builder-rust-llvm16:latest \
-		-f builder/rust-llvm16.Dockerfile \
+		-t ${TAG_PREFIX}/builder-rust-llvm:latest \
+		-f builder/rust-llvm.Dockerfile \
 		--pull \
 		--platform ${BUILDX_PLATFORMS} \
 		--output type=registry,${ANNOTATIONS} \
 		.
 
-push-builder-node18: | push-builder-rust-llvm16
+push-builder-node18: | push-builder-rust-llvm
 	@echo -e "\033[92m\nBuilding Docker Image - Builder NodeJS LTS 18\033[0m"
 	@$(eval ANNOTATIONS=$(shell cat annotation-base.txt | tr -d '\n'))
 	@$(eval ANNOTATIONS=${ANNOTATIONS}"NodeJS LTS 18 builder image")
@@ -126,15 +124,15 @@ check-base-ubuntu2204:
 		--build-arg PLATFORM=${BUILDX_PLATFORM_AMD64} \
 		.
 
-check-builder-rust-llvm16: | check-base-ubuntu2204
-	@echo -e "\033[92m\nChecking Docker Image - Builder Rust LLVM16\033[0m"
+check-builder-rust-llvm: | check-base-ubuntu2204
+	@echo -e "\033[92m\nChecking Docker Image - Builder Rust LLVM\033[0m"
 	DOCKER_BUILDKIT=0 docker build \
-		-t ${TAG_PREFIX}/builder-rust-llvm16:latest \
-		-f builder/rust-llvm16.Dockerfile \
+		-t ${TAG_PREFIX}/builder-rust-llvm:latest \
+		-f builder/rust-llvm.Dockerfile \
 		--build-arg PLATFORM=${BUILDX_PLATFORM_AMD64} \
 		.
 
-check-builder-node18: | check-builder-rust-llvm16
+check-builder-node18: | check-builder-rust-llvm
 	@echo -e "\033[92m\nChecking Docker Image - Builder NodeJS LTS 18\033[0m"
 	DOCKER_BUILDKIT=0 docker build \
 		-t ${TAG_PREFIX}/builder-node18:latest \

@@ -3,16 +3,16 @@ ARG PLATFORM=${TARGETPLATFORM}
 FROM --platform=${PLATFORM} ghcr.io/bamboolabs-foundation/base-ubuntu2204:latest
 
 ## MultiArch Arguments - Required
-ARG RS_NIGHTLY="nightly-2023-08-08"
-ARG RS_STABLE="1.72.1"
+ARG RS_NIGHTLY="nightly-2023-11-11"
+ARG RS_STABLE="1.74.0"
 RUN test -n "${RS_NIGHTLY:?}" && \
     test -n "${RS_STABLE:?}"
 
 ## Environment Variables - Build Arguments (Unordered)
 ENV CARGO_HOME="/usr/local/cargo"
 ENV CARGO_INCREMENTAL="false"
-ENV CC="clang-16"
-ENV CXX="clang-16"
+ENV CC="clang-17"
+ENV CXX="clang-17"
 ENV RS_NIGHTLY=${RS_NIGHTLY}
 ENV RS_STABLE=${RS_STABLE}
 ENV RUSTUP_HOME="/usr/local/rustup"
@@ -33,8 +33,8 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-## LLVM 16
-RUN wget -qO - https://apt.llvm.org/llvm.sh | bash -s 16 all
+## LLVM
+RUN wget -qO - https://apt.llvm.org/llvm.sh | bash -s all
 
 ## Others
 RUN apt-get update && \
