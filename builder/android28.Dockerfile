@@ -1,9 +1,9 @@
 FROM ghcr.io/bamboolabs-foundation/builder-substrate:latest
 
 ## MultiArch Arguments - Required
-ARG GRADLE_VERSION="8.2.1"
-ARG NDK_VERSION="25.2.9519653"
-ARG SDKMANAGER_VERSION="9477386_latest"
+ARG GRADLE_VERSION="8.4.0"
+ARG NDK_VERSION="26.3.11579264"
+ARG SDKMANAGER_VERSION="11076708_latest"
 
 ## Environment Variables - Android specific
 ENV ANDROID_HOME="/opt/android"

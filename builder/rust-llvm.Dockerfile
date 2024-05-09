@@ -3,16 +3,16 @@ ARG PLATFORM=${TARGETPLATFORM}
 FROM --platform=${PLATFORM} ghcr.io/bamboolabs-foundation/base-ubuntu2204:latest
 
 ## MultiArch Arguments - Required
-ARG RS_NIGHTLY="nightly-2023-11-11"
-ARG RS_STABLE="1.74.0"
+ARG RS_NIGHTLY="nightly-2024-04-22"
+ARG RS_STABLE="1.78.0"
 RUN test -n "${RS_NIGHTLY:?}" && \
     test -n "${RS_STABLE:?}"
 
 ## Environment Variables - Build Arguments (Unordered)
 ENV CARGO_HOME="/usr/local/cargo"
 ENV CARGO_INCREMENTAL="false"
-ENV CC="clang-17"
-ENV CXX="clang-17"
+ENV CC="clang-18"
+ENV CXX="clang-18"
 ENV RS_NIGHTLY=${RS_NIGHTLY}
 ENV RS_STABLE=${RS_STABLE}
 ENV RUSTUP_HOME="/usr/local/rustup"
@@ -33,8 +33,8 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-## LLVM
-RUN wget -qO - https://apt.llvm.org/llvm.sh | bash -s all
+## LLVM - 18
+RUN wget -qO - https://apt.llvm.org/llvm.sh | bash -s 18 all
 
 ## Others
 RUN apt-get update && \
@@ -118,7 +118,6 @@ RUN export RUST_HOST="$(uname -p)-unknown-linux-gnu" && \
     aarch64-unknown-linux-gnu \
     wasm32-unknown-emscripten \
     wasm32-unknown-unknown \
-    wasm32-wasi \
     x86_64-linux-android \
     x86_64-unknown-linux-gnu && \
     rustup toolchain install ${RS_STABLE} \
@@ -130,7 +129,6 @@ RUN export RUST_HOST="$(uname -p)-unknown-linux-gnu" && \
     aarch64-unknown-linux-gnu \
     wasm32-unknown-emscripten \
     wasm32-unknown-unknown \
-    wasm32-wasi \
     x86_64-linux-android \
     x86_64-unknown-linux-gnu && \
     ln -s /usr/local/rustup/toolchains/${RS_NIGHTLY}-${RUST_HOST} \

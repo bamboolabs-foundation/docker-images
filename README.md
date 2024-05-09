@@ -21,9 +21,9 @@ Either `x86_64 (amd64)` or `aarch64 (arm64)`, except for `Android Builder (amd64
 
 * Base Image     : `ghcr.io/bamboolabs-foundation/base-ubuntu2204:latest`
 * Image Name     : `ghcr.io/bamboolabs-foundation/builder-rust-llvm:latest`
-* Rust Nightly   : `nightly-2023-11-11`
-* Rust Stable    : `1.74.0`
-* LLVM           : `16.0.6` & `17.0.4`
+* Rust Nightly   : `nightly-2024-04-22`
+* Rust Stable    : `1.78.0`
+* LLVM           : `18.1.4`
 * GCC/G++        : `11.4.0`
 
 ### [Builder - NodeJS LTS 18](builder/rust-llvm.Dockerfile)
@@ -39,19 +39,17 @@ Either `x86_64 (amd64)` or `aarch64 (arm64)`, except for `Android Builder (amd64
 * Base Image     : `ghcr.io/bamboolabs-foundation/builder-node18:latest`
 * Image Name     : `ghcr.io/bamboolabs-foundation/builder-substrate:latest`
 * Packages       :
-  * [cargo-contract@3.2.0](https://github.com/paritytech/cargo-contract/releases/tag/v3.2.0)
-  * [cargo-dylint@2.4.4](https://github.com/trailofbits/dylint/releases/tag/v2.4.4)
-  * [dylint-link@2.4.4](https://github.com/trailofbits/dylint/releases/tag/v2.4.4)
-  * [subxt-cli@0.31.0](https://github.com/paritytech/subxt/releases/tag/v0.31.0)
-  * [wasm-bindgen-cli@0.2.88](https://github.com/rustwasm/wasm-bindgen/releases/tag/0.2.88)
+  * [cargo-contract@4.1.1](https://github.com/paritytech/cargo-contract/releases/tag/v4.1.1)
+  * [cargo-dylint@3.1.0](https://github.com/trailofbits/dylint/releases/tag/v3.1.0)
+  * [subxt-cli@0.35.3](https://github.com/paritytech/subxt/releases/tag/v0.35.3)
+  * [wasm-bindgen-cli@0.2.92](https://github.com/rustwasm/wasm-bindgen/releases/tag/0.2.92)
   * [wasm-pack@0.12.1](https://github.com/rustwasm/wasm-pack/releases/tag/v0.12.1)
-  * [wasmtime-cli@14.0.4](https://github.com/bytecodealliance/wasmtime/releases/tag/v14.0.4)
-  * [websocat@1.12.0](https://github.com/vi/websocat/releases/tag/v1.12.0)
+  * [wasmtime-cli@20.0.2](https://github.com/bytecodealliance/wasmtime/releases/tag/v20.0.2)
 
 ### [Builder - Android 28 - 33](builder/rust-llvm.Dockerfile)
 
 * Base Image     : `ghcr.io/bamboolabs-foundation/builder-substrate:latest`
 * Image Name     : `ghcr.io/bamboolabs-foundation/builder-android18:latest`
-* Android SDK    : `28 - 33`
+* Android SDK    : `28 - 34`
 * Android NDK    : `25.2.9519653 (25c)`
 * Gradle         : `8.2.1`
