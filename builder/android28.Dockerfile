@@ -1,7 +1,7 @@
 FROM ghcr.io/bamboolabs-foundation/builder-substrate:latest
 
 ## MultiArch Arguments - Required
-ARG GRADLE_VERSION="8.4.0"
+ARG GRADLE_VERSION="8.4"
 ARG NDK_VERSION="26.3.11579264"
 ARG SDKMANAGER_VERSION="11076708_latest"
 
@@ -50,8 +50,25 @@ RUN mkdir -p ${SDKMANAGER_DIR} && \
 
 ## SDK 28-33 Install, NDK 25c, Build Tools
 RUN yes | sdkmanager "ndk;${NDK_VERSION}" \
+    "build-tools;28.0.0" \
+    "build-tools;28.0.1" \
+    "build-tools;28.0.2" \
+    "build-tools;28.0.3" \
+    "build-tools;29.0.0" \
+    "build-tools;29.0.1" \
+    "build-tools;29.0.2" \
+    "build-tools;29.0.3" \
+    "build-tools;30.0.0" \
+    "build-tools;30.0.1" \
+    "build-tools;30.0.2" \
     "build-tools;30.0.3" \
-    "build-tools;33.0.2" && \
+    "build-tools;31.0.0" \
+    "build-tools;32.0.0" \
+    "build-tools;33.0.0" \
+    "build-tools;33.0.1" \
+    "build-tools;33.0.2" \
+    "build-tools;33.0.3" \
+    "build-tools;34.0.0" && \
     i=28 && \
     while [ ${i} -ne 34 ]; \
     do \

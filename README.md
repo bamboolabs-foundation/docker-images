@@ -23,18 +23,18 @@ Either `x86_64 (amd64)` or `aarch64 (arm64)`, except for `Android Builder (amd64
 * Image Name     : `ghcr.io/bamboolabs-foundation/builder-rust-llvm:latest`
 * Rust Nightly   : `nightly-2024-04-22`
 * Rust Stable    : `1.78.0`
-* LLVM           : `18.1.4`
+* LLVM           : `18.1.3`
 * GCC/G++        : `11.4.0`
 
-### [Builder - NodeJS LTS 18](builder/rust-llvm.Dockerfile)
+### [Builder - NodeJS LTS 18](builder/node18.Dockerfile)
 
 * Base Image     : `ghcr.io/bamboolabs-foundation/builder-rust-llvm:latest`
 * Image Name     : `ghcr.io/bamboolabs-foundation/builder-node18:latest`
-* NodeJS         : `18.18.2`
-* NPM            : `9.8.1`
-* Yarn Classic   : `1.22.19`
+* NodeJS         : `18.20.2`
+* NPM            : `10.5.0`
+* Yarn Classic   : `1.22.22`
 
-### [Builder - Substrate & Parity Ink](builder/rust-llvm.Dockerfile)
+### [Builder - Substrate & Parity Ink](builder/substrate.Dockerfile)
 
 * Base Image     : `ghcr.io/bamboolabs-foundation/builder-node18:latest`
 * Image Name     : `ghcr.io/bamboolabs-foundation/builder-substrate:latest`
@@ -46,10 +46,10 @@ Either `x86_64 (amd64)` or `aarch64 (arm64)`, except for `Android Builder (amd64
   * [wasm-pack@0.12.1](https://github.com/rustwasm/wasm-pack/releases/tag/v0.12.1)
   * [wasmtime-cli@20.0.2](https://github.com/bytecodealliance/wasmtime/releases/tag/v20.0.2)
 
-### [Builder - Android 28 - 33](builder/rust-llvm.Dockerfile)
+### [Builder - Android 28 - 34](builder/android28.Dockerfile)
 
 * Base Image     : `ghcr.io/bamboolabs-foundation/builder-substrate:latest`
-* Image Name     : `ghcr.io/bamboolabs-foundation/builder-android18:latest`
+* Image Name     : `ghcr.io/bamboolabs-foundation/builder-android28:latest`
 * Android SDK    : `28 - 34`
-* Android NDK    : `25.2.9519653 (25c)`
-* Gradle         : `8.2.1`
+* Android NDK    : `26.3.11579264 (26d)`
+* Gradle         : `8.4`

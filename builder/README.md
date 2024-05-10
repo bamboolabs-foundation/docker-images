@@ -7,7 +7,7 @@ These images are commonly used for `build stage` in `multi-stage` docker build, 
 1. [Builder - Rust LLVM](./rust-llvm.Dockerfile) <- [Base - Ubuntu 22.04](../base/ubuntu2204.Dockerfile)
 2. [Builder - NodeJS LTS 18](./node18.Dockerfile) <- [Builder - Rust LLVM](./rust-llvm.Dockerfile)
 3. [Builder - Substrate & Parity Ink!](./substrate.Dockerfile) <- [Builder - NodeJS LTS 18](./node18.Dockerfile)
-4. [Builder - Android 28 - 33](./android28.Dockerfile) <- [Builder - Substrate & Parity Ink!](./substrate.Dockerfile)
+4. [Builder - Android 28 - 34](./android28.Dockerfile) <- [Builder - Substrate & Parity Ink!](./substrate.Dockerfile)
 
 ## Image Tags
 
@@ -29,8 +29,8 @@ ghcr.io/bamboolabs-foundation/builder-node18:latest
 ghcr.io/bamboolabs-foundation/builder-substrate:latest
 ```
 
-### 4. Builder - Android 28 - 33
+### 4. Builder - Android 28 - 34
 
 ```plain
-ghcr.io/bamboolabs-foundation/builder-android18:latest
+ghcr.io/bamboolabs-foundation/builder-android28:latest
 ```

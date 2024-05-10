@@ -105,9 +105,9 @@ push-builder-substrate: | push-builder-node18
 		.
 
 push-builder-android28: | push-builder-substrate
-	@echo -e "\033[92m\nBuilding Docker Image - Builder Android (28-33)\033[0m"
+	@echo -e "\033[92m\nBuilding Docker Image - Builder Android (28-34)\033[0m"
 	@$(eval ANNOTATIONS=$(shell cat annotation-base.txt | tr -d '\n'))
-	@$(eval ANNOTATIONS=${ANNOTATIONS}"Android builder image for Platform 28-33")
+	@$(eval ANNOTATIONS=${ANNOTATIONS}"Android builder image for Platform 28-34")
 	docker buildx build \
 		-t ${TAG_PREFIX}/builder-android28:latest \
 		-f builder/android28.Dockerfile \
@@ -149,7 +149,7 @@ check-builder-substrate: | check-builder-node18
 		.
 
 check-builder-android28: | check-builder-substrate
-	@echo -e "\033[92m\nChecking Docker Image - Builder Android (28-33)\033[0m"
+	@echo -e "\033[92m\nChecking Docker Image - Builder Android (28-34)\033[0m"
 	DOCKER_BUILDKIT=0 docker build \
 		-t ${TAG_PREFIX}/builder-android28:latest \
 		-f builder/android28.Dockerfile \
