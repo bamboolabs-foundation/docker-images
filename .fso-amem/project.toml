@@ -1,0 +1,6 @@
+[project]
+name = "bamboo-docker-images"
+slug = "bamboo-docker-images"
+
+[amem]
+server = "https://amem.flusci.org"
